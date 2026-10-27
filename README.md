@@ -9,6 +9,9 @@ and a pre-planned strike levels the district around you. You wake up in the ruin
 with a concussion, a broken phone and a scattered squad. Find them, keep them alive,
 get a message home and survive **twelve days** until the rescue helicopter lands.
 
+**Play in your browser (desktop, keyboard and mouse):** https://claude.ai/artifact/LrRKeJ49rJJe9icu33QiUc
+(saves live in that browser's local storage).
+
 ![The squad on the Marktplatz before the strike](docs/screenshots/01-arrival.jpg)
 
 | | |

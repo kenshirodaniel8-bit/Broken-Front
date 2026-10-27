@@ -35,6 +35,7 @@ export function installMenus(ui, app) {
         h('button', { onclick: () => ui.showAbout() }, 'About'),
       ),
       storageAvailable() ? '' : h('p', { class: 'warn' }, 'Browser storage is unavailable: saving is disabled in this window.'),
+      matchMedia('(pointer: coarse)').matches && !matchMedia('(pointer: fine)').matches ? h('p', { class: 'warn' }, 'BROKEN FRONT is played with a keyboard and mouse. Open it in a desktop browser.') : '',
       h('p', { class: 'foot' }, 'A fictional story. Headphones recommended.'),
     );
   };

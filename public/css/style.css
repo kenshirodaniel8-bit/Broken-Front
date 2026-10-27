@@ -1,4 +1,6 @@
+/* A single, deliberately dark look: the tactical night-ops palette. */
 :root {
+  color-scheme: dark;
   --bg: #111312;
   --panel: rgba(16, 18, 17, 0.92);
   --panel-2: rgba(28, 31, 29, 0.95);
