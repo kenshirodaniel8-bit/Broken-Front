@@ -83,7 +83,7 @@ kbd { font-family: var(--mono); background: #2a2e2b; border: 1px solid var(--lin
 /* --- HUD -------------------------------------------------------------------- */
 #hud { position: fixed; inset: 0; font-size: 15px; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9); }
 #hud[hidden] { display: none; }
-#hud.drone .hud-vitals, #hud.drone .hud-injuries, #hud.drone .hud-weapon, #hud.drone .hud-quick, #hud.drone .crosshair, #hud.drone .hud-prompt { display: none; }
+#hud.drone .hud-vitals, #hud.drone .hud-injuries, #hud.drone .hud-weapon, #hud.drone .hud-quick, #hud.drone .crosshair, #hud.drone .hud-prompt, #hud.drone .hud-clock, #hud.drone .hud-objectives, #hud.drone .hud-hint { display: none; }
 .hud-clock { position: absolute; top: 14px; left: 16px; }
 .hud-clock .day { font-family: var(--mono); font-size: 20px; color: var(--accent); letter-spacing: 0.1em; }
 .hud-clock .day span { color: var(--text); margin-left: 6px; }

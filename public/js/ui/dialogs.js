@@ -188,6 +188,7 @@ export function installDialogs(ui, { onMainMenu, onLoadSlot }) {
   // --- Death and endings ----------------------------------------------------------------------
   ui.showDeath = (reason) => {
     const g = ui.game;
+    ui.showHud(false);
     const last = latestSave();
     ui.open('death', h('div', { class: 'endscreen dead' },
       h('h1', {}, 'KILLED IN ACTION'), h('p', {}, reason), h('p', { class: 'muted' }, `Day ${g.campaign.day}, ${formatClock(g.campaign.minutes)}`),
@@ -197,6 +198,7 @@ export function installDialogs(ui, { onMainMenu, onLoadSlot }) {
   };
 
   ui.showEnding = (ending, stats) => {
+    ui.showHud(false);
     ui.open('ending', h('div', { class: `endscreen ${ending.tone}` },
       h('div', { class: 'small' }, 'BROKEN FRONT'), h('h1', {}, ending.title), h('p', { class: 'lead' }, ending.text),
       h('div', { class: 'epilogue' }, ...ending.epilogue.map((e) => h('p', {}, e))),

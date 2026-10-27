@@ -3,7 +3,7 @@
 //   { "jet": { "file": "jet.glb", "scale": 1 }, "helicopter": { "file": "heli.glb" } }
 // Any key present replaces the procedural model of the same name; anything
 // missing keeps the procedural stand-in. Keys: jet, helicopter, rescue_helicopter,
-// drone, car, bus.
+// drone.
 
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 

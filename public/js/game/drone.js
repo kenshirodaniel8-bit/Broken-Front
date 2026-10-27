@@ -132,6 +132,8 @@ export class Drone {
     this.pos.x = clamp(this.pos.x, -170, 170);
     this.pos.z = clamp(this.pos.z, -170, 170);
     this.mesh.position.copy(this.pos);
+    // The camera sits inside the drone: hide it while flying from its own view.
+    this.mesh.visible = g.mode !== 'drone';
     this.mesh.rotation.set(-this.vel.z * 0.03 * Math.cos(this.yaw), this.yaw, this.vel.x * 0.03, 'YXZ');
     this.sound?.setPos(this.pos);
     this.sound?.setRate(1 + this.vel.length() * 0.03);

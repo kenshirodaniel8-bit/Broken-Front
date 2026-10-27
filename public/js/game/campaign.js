@@ -30,7 +30,7 @@ const tmName = { bima: 'Bima', rizky: 'Rizky', sari: 'Sari', dimas: 'Dimas' };
 // condition is met; `check(f)` completes them; `until` fails them after that day.
 export const OBJECTIVES = [
   { id: 'd1_wake', day: 1, text: 'Get up. Find out who from Elang-7 is still alive.', check: (f) => f.located >= 1 },
-  { id: 'd1_rizky', day: 1, show: (f) => f.tm.rizky.status !== 'missing', text: 'Free Rizky from the wreckage and stop his bleeding.', check: (f) => f.tm.rizky.status === 'rescued' || f.tm.rizky.status === 'dead' },
+  { id: 'd1_rizky', day: 1, show: (f) => f.tm.rizky.status !== 'missing', text: 'Free Rizky from the wreckage and stop his bleeding.', check: (f) => (f.tm.rizky.status === 'rescued' && !f.tm.rizky.seriouslyInjured) || f.tm.rizky.status === 'dead' },
   { id: 'd1_wounds', day: 1, optional: true, show: (f) => f.playerBleeding, text: 'Stop your own bleeding (bandage: Tab or the pouch keys).', check: (f) => !f.playerBleeding },
   {
     id: 'd1_search', day: 1, text: (f) => `Find the rest of the squad (${f.located}/4 found). Follow shouts, radio calls and clues.`,
@@ -42,10 +42,10 @@ export const OBJECTIVES = [
     check: (f) => f.rescued > 0 && Object.values(f.tm).every((t) => t.status !== 'rescued' || t.sheltered || t.following),
   },
   { id: 'd2_stock', day: 2, optional: true, show: (f) => !!f.shelter, text: 'Stock the shelter stash: 4 food and 4 water.', check: (f) => f.stash.food >= 4 && f.stash.water >= 4 },
-  { id: 'd3_inspect', day: 3, text: 'Inspect your damaged phone (P).', check: (f) => f.comms.inspected },
-  { id: 'd3_power', day: 3, show: (f) => f.comms.inspected, text: 'Power a device: charge the phone or a satellite phone, or get radio batteries.', check: (f) => f.comms.powered },
-  { id: 'd3_audio', day: 3, show: (f) => f.comms.inspected, text: 'Fix the call audio: replacement speaker or earphones - or use another device.', check: (f) => f.comms.audio },
-  { id: 'd3_number', day: 3, show: (f) => f.comms.inspected, text: 'Recover the Central Command number (emergency card, Dimas, your SIM) or a radio frequency.', check: (f) => f.comms.contact },
+  { id: 'd3_inspect', day: 3, text: 'Inspect your damaged phone (P).', check: (f) => f.comms.inspected || f.rescueConfirmed },
+  { id: 'd3_power', day: 3, show: (f) => f.comms.inspected, text: 'Power a device: charge the phone or a satellite phone, or get radio batteries.', check: (f) => f.comms.powered || f.rescueConfirmed },
+  { id: 'd3_audio', day: 3, show: (f) => f.comms.inspected, text: 'Fix the call audio: replacement speaker or earphones - or use another device.', check: (f) => f.comms.audio || f.rescueConfirmed },
+  { id: 'd3_number', day: 3, show: (f) => f.comms.inspected, text: 'Recover the Central Command number (emergency card, Dimas, your SIM) or a radio frequency.', check: (f) => f.comms.contact || f.rescueConfirmed },
   { id: 'd4_signal', day: 4, show: (f) => !f.rescueConfirmed, text: 'Find a usable signal. Go high: the church tower or the Parkhaus roof.', check: (f) => !!f.flags.signalFound || f.rescueConfirmed },
   { id: 'd4_call', day: 3, show: (f) => f.day >= 4 || f.comms.anyUsable, text: 'Contact Central Command and confirm the rescue.', check: (f) => f.rescueConfirmed },
   { id: 'd5_scout', day: 5, text: 'Scout the Stadtpark landing zone - walk there or fly the drone over it.', check: (f) => !!f.flags.lzScouted },

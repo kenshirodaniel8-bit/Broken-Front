@@ -104,7 +104,7 @@ export const TEAMMATES = [
     }),
     start: { injuries: [['fracture', 'leg']], health: 60, trapped: null, critical: 96 },
     lines: {
-      help: [{ t: '...ELANG-5... my leg is broken... green cross... can anyone hear...', radio: true }, { t: 'Hello? I\'m in here! I can\'t walk!' }],
+      help: [{ t: '...ELANG-5... my leg is broken... under the red A sign... can anyone hear...', radio: true }, { t: 'Hello? I\'m in here! I can\'t walk!' }],
       found: [{ t: 'Thank God. My leg is broken - I need a splint. Or a plank and tape.' }],
       treated: [{ t: 'Good, that will hold. I can walk - slowly.' }],
       follow: [{ t: 'Coming. Don\'t go too fast.' }],

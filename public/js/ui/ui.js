@@ -105,6 +105,8 @@ export class UI {
     if (e.target?.tagName === 'INPUT') return;
     if (e.code === 'Escape') {
       e.preventDefault();
+      // Esc also releases pointer lock, which already opened the pause menu.
+      if (performance.now() - (this.pauseOpenedAt || 0) < 400) return;
       if (!this.closeTop()) {
         if (g.mode === 'drone') g.drone.land(); else this.openPause();
       }

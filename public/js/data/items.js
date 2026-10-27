@@ -86,7 +86,7 @@ export const ITEMS = Object.fromEntries([
   I('freq_card', 'Radio frequency card', 'document', 0.01, { desc: 'Command net frequencies and call signs.' }),
   I('intel_orders', 'Enemy operation orders', 'document', 0.02, { desc: 'Orders for operation ASHEN SKY. Proof the strike was planned weeks in advance.' }),
   I('city_map', 'Tourist map of Kreuzhafen', 'document', 0.05, { desc: 'Reveals the street layout on your map.' }),
-  I('note_sari', "Torn notebook page", 'document', 0.01, { desc: '"...carried her into the Apotheke, leg looks broken. Couldn\'t stay. - K." A green cross is sketched in the margin.' }),
+  I('note_sari', "Torn notebook page", 'document', 0.01, { desc: '"...carried her into the Apotheke, leg looks broken. Couldn\'t stay. - K." A red gothic A - the Apotheke sign - is sketched in the margin.' }),
   I('note_dimas', 'Radio log scrap', 'document', 0.01, { desc: 'Callsign ELANG-4 (Dimas) last keyed his radio near the church, St. Marien.' }),
   I('note_bima', 'Bloody field notebook', 'document', 0.01, { desc: '"Bima pinned near the Feuerwache. Need a jack or bar to lift the slab."' }),
 

@@ -310,7 +310,7 @@ export class Squad {
       m.mode = s.mode || 'idle';
       m.speed = 0;
     }
-    if (s.face) m.yaw = dampAngle(m.yaw, yawTo(m.pos.x, m.pos.z, s.face.x, s.face.z) + Math.PI, 4, dt);
+    if (s.face) m.yaw = dampAngle(m.yaw, yawTo(m.pos.x, m.pos.z, s.face.x, s.face.z), 4, dt);
     m.lookPitch = s.mode === 'lookUp' ? 0.6 : 0;
   }
 
@@ -354,7 +354,7 @@ export class Squad {
     if (threat && m.dangerCooldown <= 0 && m.lineCooldown <= 0) { m.say('danger'); m.dangerCooldown = 25; }
     // Engage visible enemies when following or holding.
     if (threat && m.order !== 'shelter' && threat.visible) {
-      m.yaw = dampAngle(m.yaw, yawTo(m.pos.x, m.pos.z, threat.enemy.pos.x, threat.enemy.pos.z) + Math.PI, 8, dt);
+      m.yaw = dampAngle(m.yaw, yawTo(m.pos.x, m.pos.z, threat.enemy.pos.x, threat.enemy.pos.z), 8, dt);
       m.mode = 'crouch';
       m.speed = 0;
       m.aiming = true;

@@ -116,6 +116,7 @@ export function installMenus(ui, app) {
     const g = ui.game;
     if (!g || g.mode === 'menu' || g.mode === 'dead' || g.mode === 'ending') return;
     if (ui.isOpen('pause')) return;
+    ui.pauseOpenedAt = performance.now();
     const canSave = g.campaignStarted;
     ui.open('pause', h('div', { class: 'panel dialog pause' },
       h('h2', {}, 'Paused'),

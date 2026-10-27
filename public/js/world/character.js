@@ -458,9 +458,10 @@ export class Character {
     this.weapon = buildWeaponModel(key, { lowDetail: true });
     this.weaponMode = mode;
     if (mode === 'slung') {
+      // Diagonally across the back, muzzle down to the left.
       this.j.spine.add(this.weapon);
-      this.weapon.position.set(0.05, 0.2, 0.2);
-      this.weapon.rotation.set(0, Math.PI / 2, 0.9);
+      this.weapon.position.set(0.04, 0.22, 0.24);
+      this.weapon.quaternion.setFromUnitVectors(new THREE.Vector3(0, 0, -1), new THREE.Vector3(-0.55, -0.83, 0.06).normalize());
     } else {
       this.j.handR.add(this.weapon);
       this.weapon.position.set(0, -0.08, 0);
@@ -534,8 +535,9 @@ export class Character {
         set('shoulderR', 1.25, -0.2, 0.25); set('elbowR', 0.45);
         set('shoulderL', 1.35, 0.25, -0.5); set('elbowL', 0.3);
       } else {
-        set('shoulderR', 0.35, -0.2, 0.12); set('elbowR', 1.05);
-        set('shoulderL', 0.85, 0.35, -0.35); set('elbowL', 0.75);
+        // Low ready: muzzle down and across the body.
+        set('shoulderR', 0.25, 0.3, 0.15); set('elbowR', 0.65);
+        set('shoulderL', 0.75, 0.45, -0.3); set('elbowL', 0.85);
       }
     }
     switch (mode) {
