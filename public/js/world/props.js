@@ -421,3 +421,10 @@ export class Props {
 
   static lampGeometry() { return lampGeometry(); }
 }
+
+// A single drivable car (opening traffic). Paint colour multiplies the white body.
+export function makeCar(type = 'sedan', color = '#b9bcc0') {
+  const mesh = new THREE.Mesh(carGeometry(type, false), M.std(color, 0.45, 0.3, { vertexColors: true }));
+  mesh.castShadow = true;
+  return mesh;
+}
