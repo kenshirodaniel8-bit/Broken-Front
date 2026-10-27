@@ -1,0 +1,20 @@
+{
+  "name": "broken-front",
+  "version": "0.1.0",
+  "private": true,
+  "description": "BROKEN FRONT - a realistic first-person military survival game for the browser.",
+  "type": "module",
+  "scripts": {
+    "start": "node server/server.js",
+    "test": "node --test \"tests/*.test.js\"",
+    "smoke": "node scripts/smoke.mjs",
+    "build:static": "node scripts/build-static.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "three": "0.186.1"
+  }
+}
