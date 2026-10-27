@@ -359,6 +359,7 @@ export class Game {
   }
 
   loadSnapshot(s) {
+    this.loadCount = (this.loadCount || 0) + 1;
     this.resetSystems(s.config);
     this.world = { extraCollapsed: [], clearedDebris: [], ...s.world };
     this.extraColliders = s.extra?.extraColliders || [];
@@ -1064,7 +1065,7 @@ export class Game {
 
   // --- Player events ---------------------------------------------------------------------
   damagePlayer(amount, opts = {}) {
-    if (!this.playerAlive) return;
+    if (!this.playerAlive || this.godMode) return; // godMode: automated tests only
     const s = this.stats;
     const res = applyDamage(this.vitals, amount, { ...opts, armor: s.armor, headArmor: s.headArmor, concussionResist: s.concussionResist });
     if (!opts.silent) {

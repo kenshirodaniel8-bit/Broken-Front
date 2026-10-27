@@ -402,7 +402,7 @@ export class Enemies {
     this.noise(e.pos.x, e.pos.z, 90, 1, 'enemy');
     if (per.see) {
       const pl = g.player;
-      let chance = 0.42 * clamp(1.15 - per.dist / 70, 0.15, 1);
+      let chance = 0.34 * clamp(1.15 - per.dist / 70, 0.15, 1);
       if (pl.crouched) chance *= 0.65;
       if (pl.moving) chance *= pl.sprinting ? 0.55 : 0.8;
       chance *= 1 - g.darkness * 0.45;

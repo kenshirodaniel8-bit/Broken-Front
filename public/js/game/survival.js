@@ -173,9 +173,11 @@ export function consume(v, itemDef, rng = Math.random) {
 // Treats the most serious injury the item can treat. `healMult` comes from
 // the medic role. Returns the treated injury type or null.
 export function treat(v, itemId, healMult = 1) {
+  // Most severe first; among equals, whatever drains health fastest (bleeding before a cut).
   const candidates = activeInjuries(v)
     .filter((i) => INJURY_TYPES[i.type].treatedBy.includes(itemId))
-    .sort((a, b) => SEVERITY_ORDER[INJURY_TYPES[b.type].severity] - SEVERITY_ORDER[INJURY_TYPES[a.type].severity]);
+    .sort((a, b) => (SEVERITY_ORDER[INJURY_TYPES[b.type].severity] - SEVERITY_ORDER[INJURY_TYPES[a.type].severity])
+      || (INJURY_TYPES[a.type].hpPerMin - INJURY_TYPES[b.type].hpPerMin));
   let treated = null;
   if (candidates.length) {
     const inj = candidates[0];
