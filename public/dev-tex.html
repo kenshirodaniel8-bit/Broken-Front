@@ -1,0 +1,16 @@
+<!doctype html><html><head><meta charset="utf-8">
+<script type="importmap">{ "imports": { "three": "./lib/three/build/three.module.js", "three/addons/": "./lib/three/examples/jsm/" } }</script>
+<style>body{background:#888;margin:0}canvas{margin:4px;width:200px;height:200px}</style></head><body>
+<script type="module">
+import * as T from './js/world/textures.js';
+for (let s = 0; s < 11; s++) document.body.appendChild(T.facadeTexture(s, 0).image);
+document.body.appendChild(T.facadeTexture(0, 2).image);
+document.body.appendChild(T.groundTexture('shop', 0).image);
+document.body.appendChild(T.groundTexture('plain', 1).image);
+document.body.appendChild(T.camoTexture('loreng', '#4f5838').image);
+document.body.appendChild(T.camoTexture('woodland', '#4f5838').image);
+document.body.appendChild(T.camoTexture('multi', '#4f5838').image);
+document.body.appendChild(T.roofTexture('tile').image);
+document.body.appendChild(T.groundMaterialTexture('rubble').image);
+document.title = 'ready';
+</script></body></html>

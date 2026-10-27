@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>BROKEN FRONT dev viewer</title>
+<script type="importmap">{ "imports": { "three": "./lib/three/build/three.module.js", "three/addons/": "./lib/three/examples/jsm/" } }</script>
+<style>html,body{margin:0;background:#000;overflow:hidden}canvas{display:block}</style>
+</head>
+<body>
+<script type="module">
+import * as THREE from 'three';
+import { generateLayout, pickBlastTargets } from './js/world/layout.js';
+import { City } from './js/world/city.js';
+import { Props } from './js/world/props.js';
+import { Sky } from './js/world/sky.js';
+import { Character } from './js/world/character.js';
+import { defaultConfig, randomConfig } from './js/data/customization.js';
+import { TEAMMATES } from './js/data/teammates.js';
+const q = new URLSearchParams(location.search);
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setSize(innerWidth, innerHeight);
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFShadowMap;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+document.body.appendChild(renderer.domElement);
+const scene = new THREE.Scene();
+const { RoomEnvironment } = await import('three/addons/environments/RoomEnvironment.js');
+scene.environment = new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(), 0.04).texture;
+const cam = new THREE.PerspectiveCamera(70, innerWidth / innerHeight, 0.05, 900);
+const L = generateLayout();
+const ruined = q.get('ruined') === '1';
+const p = L.playerAfterBlast;
+const blast = pickBlastTargets(L, p.x, p.z, p.yaw);
+const collapsed = new Set([...L.buildings.filter(b => b.collapse).map(b => b.id), ...blast.map(t => t.building).filter(Boolean)]);
+const state = { ruined, collapsed, clearedDebris: new Set(), blast };
+const t0 = performance.now();
+const city = new City(scene, L);
+city.build(state);
+new Props(city.group, L, state);
+const sky = new Sky(scene, { shadows: 2 });
+sky.setRuined(ruined);
+const [x, y, z, tx, ty, tz] = (q.get('cam') || '30,1.7,50,30,3,90').split(',').map(Number);
+cam.position.set(x, y, z);
+cam.lookAt(tx, ty, tz);
+sky.update(Number(q.get('time') || 660), new THREE.Vector3(x, 0, z));
+if (q.get('chars')) {
+  const cfgs = [defaultConfig(), ...TEAMMATES.map(t => t.look), randomConfig(7)];
+  cfgs.forEach((c, i) => {
+    const ch = new Character(c, { weapon: i % 2 ? 'ar' : null });
+    ch.root.position.set(tx - 3 + i * 1.3, 0, tz);
+    ch.root.rotation.y = Math.PI;
+    ch.state.mode = ['idle', 'walk', 'lookUp', 'sitting', 'crouch', 'wave'][i % 6];
+    for (let k = 0; k < 60; k++) ch.animate(0.05);
+    scene.add(ch.root);
+  });
+}
+if (q.get('nobump')) scene.traverse(o => { if (o.material && o.material.bumpMap) { o.material.bumpMap = null; o.material.needsUpdate = true; } });
+if (q.get('novc')) scene.traverse(o => { if (o.material && o.material.vertexColors) { o.material.vertexColors = false; o.material.needsUpdate = true; } });
+renderer.render(scene, cam);
+document.title = 'ready ' + Math.round(performance.now() - t0) + 'ms calls=' + renderer.info.render.calls + ' tris=' + renderer.info.render.triangles;
+</script>
+</body>
+</html>
